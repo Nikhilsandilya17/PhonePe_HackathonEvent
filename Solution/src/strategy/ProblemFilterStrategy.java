@@ -5,5 +5,5 @@ import model.Problem;
 import java.util.List;
 
 public interface ProblemFilterStrategy {
-    void filter(List<Problem> problems);
+    List<Problem> filter(List<Problem> problems);
 }

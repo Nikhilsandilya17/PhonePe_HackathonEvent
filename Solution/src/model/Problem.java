@@ -11,6 +11,7 @@ public class Problem {
     private int score;
     private ProblemStatus problemStatus;
     private int solvedCount;
+    private int likes;
 
     public Problem(String id, String description, String tag, ProblemDifficulty problemDifficulty, int score) {
         this.id = id;
@@ -20,6 +21,7 @@ public class Problem {
         this.score = score;
         problemStatus = ProblemStatus.UNSOLVED;
         solvedCount = 0;
+        likes = 0;
     }
 
     public String getDescription() {
@@ -80,6 +82,14 @@ public class Problem {
                 ", score=" + score +
                 ", problemStatus=" + problemStatus +
                 '}';
+    }
+
+    public int getLikes() {
+        return likes;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
     }
 
     public int getSolvedCount() {

@@ -46,7 +46,9 @@ public class UserServiceImpl implements UserService {
         problem.setProblemStatus(ProblemStatus.SOLVED);
         user.getSolvedProblems().add(problem);
         user.setCurrentScore(user.getCurrentScore() + problem.getScore());
+//        getRecommendation(problem.getTag());
     }
+
 
     private User getUser(String id) {
         return userRepository.getUserById(id);

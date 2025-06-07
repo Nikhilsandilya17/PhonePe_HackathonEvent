@@ -8,6 +8,7 @@ import service.impl.UserServiceImpl;
 import strategy.impl.DifficultyFilterStrategyImpl;
 import strategy.impl.DifficultySortStrategyImpl;
 import strategy.impl.ScoreSortStrategyImpl;
+import strategy.impl.TagFilterStrategyImpl;
 
 public class HackathonEvent {
     public static void main(String[] args) {
@@ -20,14 +21,15 @@ public class HackathonEvent {
 
         //Add new Problem
         Problem problem1 = problemService.addProblem("Problem 1", "Tag1", ProblemDifficulty.EASY, 10);
-        Problem problem2 = problemService.addProblem("Problem 2", "Tag2", ProblemDifficulty.MEDIUM, 20);
-        Problem problem3 = problemService.addProblem("Problem 3", "Tag3", ProblemDifficulty.HARD, 30);
-        Problem problem4 = problemService.addProblem("Problem 4", "Tag4", ProblemDifficulty.EASY, 5);
+        Problem problem2 = problemService.addProblem("Problem 2", "Tag1", ProblemDifficulty.MEDIUM, 20);
+        Problem problem3 = problemService.addProblem("Problem 3", "Tag1", ProblemDifficulty.HARD, 30);
+        Problem problem4 = problemService.addProblem("Problem 4", "Tag1", ProblemDifficulty.EASY, 5);
 
         problemService.getProblemsSortedByCriteria(new ScoreSortStrategyImpl());
         problemService.getProblemsSortedByCriteria(new DifficultySortStrategyImpl());
 
-        problemService.getProblemsFilteredByCriteria(new DifficultyFilterStrategyImpl());
+        problemService.getProblemsFilteredByCriteria(new DifficultyFilterStrategyImpl(ProblemDifficulty.EASY));
+        problemService.getProblemsFilteredByCriteria(new TagFilterStrategyImpl("Tag1"));
 
         userService.solveProblem("nikhil@gcom", problem1);
         userService.solveProblem("nikhil@gcom", problem2);
@@ -37,8 +39,10 @@ public class HackathonEvent {
         userService.getProblemsSolvedByUser("nikhil@gcom");
         problemService.getCountOfUsersSolvedProblem(problem1);
 
-        User user  = userService.getCurrentLeaderOfContest();
+        User user = userService.getCurrentLeaderOfContest();
         System.out.println(user.getName() + " " + user.getCurrentScore());
+
+        problemService.getMostLikedProblemByTag(new TagFilterStrategyImpl("Tag1"));
 
 
     }
